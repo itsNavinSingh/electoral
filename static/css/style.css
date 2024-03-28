@@ -1,0 +1,24 @@
+.form-control{
+    margin: 0rem 1rem;
+}
+form{
+    display: flex;
+}
+.details{
+    margin-top: 2rem;
+}
+.body-title{
+    font-size: 3rem;
+    color: rgb(139, 185, 254);
+    text-align: center;
+}
+.full-details{
+    font-size: 1.2rem;
+}
+.details-line{
+    margin-bottom: 1.1rem;
+}
+.note{
+    color: red;
+    text-align: center;
+}

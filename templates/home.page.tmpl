@@ -1,0 +1,159 @@
+{{template "base" .}}
+
+{{define "heading"}}
+<style>
+    .eb-img{
+    height: 35rem;
+}
+.main-body{
+    margin: 1.5rem 3rem;
+}
+#eb-heading{
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+#about-eb-heading{
+    font-family: "Crete Round", serif;
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+    color: rgb(13, 110, 253);
+}
+#about-eb{
+    padding-left: 3rem;
+    font-size: 1.1rem;
+}
+.read-more{
+    float: right;
+}
+.summery{
+    font-family: "Crete Round", serif;
+    text-align: center;
+}
+.panel-heading{
+    text-align: center;
+    font-size: 3rem;
+    color: rgb(13, 110, 253);
+    margin-bottom: 2rem;
+}
+.stat-heading{
+    font-size: 1.5rem;
+}
+.stat-value{
+    font-size: 2rem;
+    color: rgb(13, 110, 253);
+}
+</style>
+{{end}}
+
+{{define "content"}}
+    <div class="container">
+        <div class="container main-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row"><img src="static/images/electoral_bond_img.jpg" alt="Electoral Bond Sample"
+                            class="eb-img"></div>
+                    <div class="row">
+                        <p id="eb-heading">Electoral Bond Sample</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                        <p id="about-eb-heading">What was Electoral Bond ?</p>
+                    </div>
+                    <div class="row">
+                        <div class="row">
+                            <p id="about-eb">
+                                Electoral bonds, once a financial mechanism introduced by the Government of India to
+                                ostensibly
+                                enhance transparency in political funding, faced a landmark ruling by the Supreme Court
+                                of
+                                India on
+                                February 14, 2024. These bonds, introduced through the Finance Act, 2017, were designed
+                                as
+                                bearer instruments allowing donations to political parties by citizens, entities, and
+                                even
+                                foreign-incorporated bodies in various denominations. The scheme was touted as a step
+                                towards
+                                curbing the influence of black money in politics, with proponents arguing that the
+                                anonymity
+                                it
+                                provided to donors protected them from potential repercussions, thus encouraging
+                                contributions.
+                                However, the Supreme Court's decision to strike down the Electoral Bonds Scheme revealed
+                                the
+                                scheme's fundamental flaws. The court ruled that the scheme's anonymity clause
+                                contradicted
+                                the
+                                public's right to know about the sources of political funding, a cornerstone of
+                                democratic
+                                governance. Furthermore, the court highlighted the grave concern of potential quid pro
+                                quo
+                                arrangements.
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="col"><a href="#" class="btn btn-outline-primary read-more">Read
+                                    More..</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container summery">
+            <div class="row">
+                <p class="panel-heading">Take a Look at the Statistics of Electoral Bond</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <p class="stat-heading">Total No. of Bonds Purchesed</p>
+                    </div>
+                    <div class="row">
+                        <p class="stat-value"><span class="val">22000</span></p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <p class="stat-heading">Total No. of Bonds Enchased</p>
+                    </div>
+                    <div class="row">
+                        <p class="stat-value"><span class="val">21000</span></p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <p class="stat-heading">Total Values of Bond Purchased</p>
+                    </div>
+                    <div class="row">
+                        <p class="stat-value">₹ <span class="val">120000000000</span></p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <p class="stat-heading">Total Values of Bond Enchased</p>
+                    </div>
+                    <div class="row">
+                        <p class="stat-value">₹ <span class="val">120000000000</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a href="#" class="btn btn-primary">Party Wise Details</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-primary">Donor Wise Details</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-primary">Donor with Party Details</a>
+                </div>
+                <div class="col">
+                    <a href="#" class="btn btn-primary">Search By Bond Number</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}

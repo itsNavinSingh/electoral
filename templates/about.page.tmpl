@@ -1,0 +1,187 @@
+{{template "base" .}}
+
+{{define "heading"}}
+<style>
+.main-body{
+    font-family: "Crete Round", serif;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.top-heading{
+    font-size: 2.5rem;
+    color: rgb(13, 110, 253);
+}
+.date{
+    text-align: left;
+}
+.description{
+    text-align: left;
+}
+.time{
+    margin-top: 3rem;
+}
+p{
+    font-size: 1.1rem;
+    line-height: 2rem;
+}
+.contributers{
+    display: flex;
+}
+.card{
+    margin: 1rem;
+}
+.card-img-top{
+    height: 12rem;
+}
+</style>
+{{end}}
+
+{{define "content"}}
+    <div class="main-body container">
+        <div class="row">
+            <p class="top-heading">
+                What really was Electoral Bond ?
+            </p>
+        </div>
+        <div class="row">
+            <p class="qabout">
+                Electoral bonds, once a financial mechanism introduced by the Government of India to ostensibly enhance
+                transparency in political funding, faced a landmark ruling by the Supreme Court on February 14, 2024.
+                These bonds, introduced through the Finance Act, 2017, were designed as bearer instruments allowing
+                donations to political parties by citizens, entities, and even foreign-incorporated bodies in various
+                denominations. The scheme was touted as a step towards curbing the influence of black money in politics,
+                with proponents arguing that the anonymity it provided to donors protected them from potential
+                repercussions, thus encouraging contributions.
+
+                However, the Supreme Court's decision to strike down the Electoral Bonds Scheme revealed the scheme's
+                fundamental flaws. The court ruled that the scheme's anonymity clause contradicted the public's right to
+                know about the sources of political funding, a cornerstone of democratic governance. Furthermore, the
+                court highlighted the grave concern of potential quid pro quo arrangements, where parties might feel
+                obliged to favor donors who contributed through these bonds.
+
+                The striking down of the scheme marked a turning point in the ongoing discourse surrounding political
+                funding in India. It underscored the critical importance of transparency, accountability, and the
+                people's right to know in the democratic process. The ruling was a decisive step towards rectifying the
+                lack of transparency that had plagued the system, ensuring that the democratic principles of fairness
+                and accountability were upheld.
+
+                In the wake of the Supreme Court's ruling, discussions have emerged about the future of political
+                financing in India. Calls for reforms now resonate louder, advocating for stringent regulations, greater
+                disclosure of funding sources, and measures to prevent the misuse of funds. This pivotal moment in
+                India's democratic journey stands as a testament to the nation's commitment to fostering a more
+                transparent, accountable, and equitable political landscape for its citizens.
+            </p>
+        </div>
+        <hr>
+        <div class="row time">
+            <p class="top-heading">Events Timeline</p>
+        </div>
+        <div class="row">
+            <div class="col-2 date">2017</div>
+            <div class="col-10 description">The Electoral bond scheme was introduced in the Finance Bill.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">Sep 14, 2017</div>
+            <div class="col-10 description">Association for Democratic Reforms, a NGO and lead petitioner moves Supreme
+                Court challenging scheme.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">Oct 03, 2017</div>
+            <div class="col-10 description">Supreme Court issues notices to Centre Government and Election Commission on
+                PIL filed by the NGO.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">Jan 2, 2018</div>
+            <div class="col-10 description">The Central Government notifies the Electoral Bond Scheme.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">Nov 7, 2022</div>
+            <div class="col-10 description">The Electoral Bond Scheme was amended to increase the sale days from 70 to
+                85 in a year where any assembly election may be scheduled.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">Oct 16, 2023</div>
+            <div class="col-10 description">Supreme Court bench headed by CJI DY Chandrachud refers pleas against the
+                scheme to five judge Constitution bench.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">Oct 31, 2023</div>
+            <div class="col-10 description">A five judge Constitution bench headed by CJI DY Chandrachud commences
+                hearing on pelas against the scheme.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">Nov 2, 2023</div>
+            <div class="col-10 description">Supreme Court reserves verdict.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">Feb 15, 2024</div>
+            <div class="col-10 description">Supreme Court delivers unanimous judgement annulling the scheme, saying it
+                violates Constitutional right to freedom of speech and expression as well as the right to information.
+                And ask SBI to submit the data of Donor and Purchaser to EC by March 06, 2024.
+            </div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">March 04, 2024</div>
+            <div class="col-10 description">SBI filed application to Supreme Court seeking an extention until June 30,
+                2024 to furnish the details. </div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">March 11, 2024</div>
+            <div class="col-10 description">Supreme Court dismiss the SBI's plea for extention, says disclose the
+                information by March 12, 2024</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">March 12, 2024</div>
+            <div class="col-10 description">SBI only discloses Purchaser Name, Date of Purchase, Denominations in one file and Party Name, Date of Encashment and Denominations in second file.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">March 18, 2024</div>
+            <div class="col-10 description">The Court directed SBI to disclose all the details that it has stored
+                concerning the Electoral Bonds transactions. To ensure there is no more contempt of the Court’s Order,
+                the Bench also stated that the SBI’s Chairman must file an affidavit confirming full disclosure by 5:00
+                pm on 21 March 2024.</div>
+        </div>
+        <div class="row time">
+            <div class="col-2 date">March 21, 2024</div>
+            <div class="col-10 description">SBI submit the data to Election Commission and ECI uploded the data on its website.</div>
+        </div>
+        <hr>
+    <div class="container">
+        <div class="top-heading">
+            <p>Contributers</p>
+        </div>
+        <div class="contributers">
+            <div class="card" style="width: 18rem;">
+                <img src="static/images/lokesh.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Commodore Lokesh Batra</h5>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="static/images/adr.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Association for Democratic Reforms</h5>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="static/images/commoncause.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Common Cause</h5>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="static/images/prashant.jpeg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Prashant Bhushan</h5>
+                </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img src="static/images/kapil.webp" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Kapil Sibal</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{{end}}

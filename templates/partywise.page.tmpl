@@ -1,0 +1,41 @@
+{{template "base" .}}
+
+{{define "heading"}}
+<style>
+.form-control{
+    margin: 0rem 1rem;
+}
+form{
+    display: flex;
+}
+.details{
+    margin-top: 2rem;
+}
+</style>
+{{end}}
+
+{{define "content"}}
+<div class="details container">
+        <table class="table table-light table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .}}
+                <tr>
+                    <td>{{.name}}</td>
+                    <td>{{.amount}}</td>
+                    <td><form action="/party-details" method="post">
+                        <input type="hidden" name="name" value="{{.name}}">
+                        <input type="submit" value="Details" class="btn btn-primary">
+                    </form></td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+{{end}}

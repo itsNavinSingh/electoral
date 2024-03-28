@@ -1,0 +1,87 @@
+{{template "base" .}}
+
+{{define "heading"}}
+<style>
+.form-control{
+    margin: 0rem 1rem;
+}
+form{
+    display: flex;
+}
+.details{
+    margin-top: 2rem;
+}
+.body-title{
+    font-size: 3rem;
+    color: rgb(139, 185, 254);
+}
+</style>
+{{end}}
+
+{{define "content"}}
+<div class="details container">
+        <p class="body-title">{{.DonorName}}</p>
+        <table class="table table-light table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Bond Number</th>
+                    <th scope="col">Date of Purchase</th>
+                    <th scope="col">Party</th>
+                    <th scope="col">Denomination</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .}}
+                <tr>
+                    <th scope="row">{{.BondNo}}</th>
+                    <td>{{.PurchaseDate}}</td>
+                    <td>{{.Party}}</td>
+                    <td>{{.Denomination}}</td>
+                    <td>
+                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#{{.BondNo}}" aria-expanded="false" aria-controls="{{.BondNo}}">See
+                            Details</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div class="collapse" id="{{.BondNo}}" class="full-details">
+                            <div class="card card-body">
+                                <div class="row">
+                                    <div class="col">Unique Bond : {{.}}</div>
+                                    <div class="col">URN : {{.}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Journal Date : {{.}}</div>
+                                    <div class="col">Date of Purchase : {{.}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Date of Expiry : {{.}}</div>
+                                    <div class="col"><strong>Name of Purchaser : {{.}}</strong></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Issue Branch Code : {{.}}</div>
+                                    <div class="col">Issue Teller : {{.}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Date of Encasement : {{.}}</div>
+                                    <div class="col"><strong>Name of Political Party : {{.}</strong></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Pay Branch Code : {{.}}</div>
+                                    <div class="col">Pay Teller : {{.}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><strong>Denomination : {{.}}</strong></div>
+                                    <div class="col">Status : {{.}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+{{end}}

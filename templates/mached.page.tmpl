@@ -1,0 +1,103 @@
+{{template "base" .}}
+
+{{define "heading"}}
+<style>
+.form-control{
+    margin: 0rem 1rem;
+}
+form{
+    display: flex;
+}
+.details{
+    margin-top: 2rem;
+}
+</style>
+{{end}}
+
+{{define "content"}}
+<div class="container">
+        <form action="">
+            <input type="text" name="no" id="no" placeholder="Bond Number" class="form-control">
+            <select name="party" id="party" class="form-control">
+                <option value="" disabled selected>Political Party</option>
+            </select>
+            <select name="donor" id="donor" class="form-control">
+                <option value="" disabled selected>Donor Name</option>
+            </select>
+            <select name="denominations" id="denominations" class="form-control">
+                <option value="" disabled selected>Denomination</option>
+                <option value="">1K</option>
+                <option value="">10K</option>
+                <option value="">1L</option>
+                <option value="">10L</option>
+                <option value="">1Cr</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <div class="details container">
+        <table class="table table-light table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Bond Number</th>
+                    <th scope="col">Name of Purchaser</th>
+                    <th scope="col">Political Party</th>
+                    <th scope="col">Denomination</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .}}
+                <tr>
+                    <th scope="row">{{.BondNo}}</th>
+                    <td>{{.Purchaser}}</td>
+                    <td>{{.Party}}</td>
+                    <td>{{.Denomination}}</td>
+                    <td>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#{{.BondNo}}" aria-expanded="false" aria-controls="{{.BondNo}}">
+                            See More
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        <div class="collapse" id="{{.BondNo}}" class="full-details">
+                            <div class="card card-body">
+                                <div class="row">
+                                    <div class="col">Unique Bond : {{.}}</div>
+                                    <div class="col">URN : {{.}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Journal Date : {{.}}</div>
+                                    <div class="col">Date of Purchase : {{.}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Date of Expiry : {{.}}</div>
+                                    <div class="col"><strong>Name of Purchaser : {{.}}</strong></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Issue Branch Code : {{.}}</div>
+                                    <div class="col">Issue Teller : {{.}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Date of Encasement : {{.}}</div>
+                                    <div class="col"><strong>Name of Political Party : {{.}</strong></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">Pay Branch Code : {{.}}</div>
+                                    <div class="col">Pay Teller : {{.}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col"><strong>Denomination : {{.}}</strong></div>
+                                    <div class="col">Status : {{.}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+{{end}}

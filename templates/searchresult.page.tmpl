@@ -1,0 +1,69 @@
+{{template "base" .}}
+
+{{define "heading"}}
+<style>
+.form-control{
+    margin: 0rem 1rem;
+}
+form{
+    display: flex;
+}
+.details{
+    margin-top: 2rem;
+}
+.body-title{
+    font-size: 3rem;
+    color: rgb(139, 185, 254);
+    text-align: center;
+}
+.full-details{
+    font-size: 1.2rem;
+}
+.details-line{
+    margin-bottom: 1.1rem;
+}
+.note{
+    color: red;
+    text-align: center;
+}
+</style>
+{{end}}
+
+{{define "content"}}
+<div class="details container">
+        <p class="body-title">Search Reasult for {{.BondNo}}</p>
+        <div id="{{.BondNo}}" class="full-details">
+            <div class="card card-body">
+                <div class="row details-line">
+                    <div class="col">Unique Bond : {{.}}</div>
+                    <div class="col">URN : {{.}}</div>
+                </div>
+                <div class="row details-line">
+                    <div class="col">Journal Date : {{.}}</div>
+                    <div class="col">Date of Purchase : {{.}}</div>
+                </div>
+                <div class="row details-line">
+                    <div class="col">Date of Expiry : {{.}}</div>
+                    <div class="col"><strong>Name of Purchaser : {{.}}</strong></div>
+                </div>
+                <div class="row details-line">
+                    <div class="col">Issue Branch Code : {{.}}</div>
+                    <div class="col">Issue Teller : {{.}}</div>
+                </div>
+                <div class="row details-line">
+                    <div class="col">Date of Encasement : {{.}}</div>
+                    <div class="col"><strong>Name of Political Party : {{.}}</strong></div>
+                </div>
+                <div class="row details-line">
+                    <div class="col">Pay Branch Code : {{.}}</div>
+                    <div class="col">Pay Teller : {{.}}</div>
+                </div>
+                <div class="row details-line">
+                    <div class="col"><strong>Denomination : {{.}}</strong></div>
+                    <div class="col">Status : {{.}}</div>
+                </div>
+            </div>
+        </div>
+         <p class="note">Note : Empty column means data not found !</p>
+</div>
+{{end}}
