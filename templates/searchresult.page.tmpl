@@ -31,7 +31,8 @@ form{
 
 {{define "content"}}
 <div class="details container">
-        <p class="body-title">Search Reasult for {{.BondNo}}</p>
+        <p class="body-title">Search Reasult for {{.heading}}</p>
+        {{range .}}
         <div id="{{.BondNo}}" class="full-details">
             <div class="card card-body">
                 <div class="row details-line">
@@ -64,6 +65,7 @@ form{
                 </div>
             </div>
         </div>
-         <p class="note">Note : Empty column means data not found !</p>
+        {{end}}
+         <p class="note">Note : Empty page means data not found !</p>
 </div>
 {{end}}

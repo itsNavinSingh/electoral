@@ -56,7 +56,7 @@
 
         .social {
             align-items: center;
-            text-align: center;
+            text-align: left;
         }
         .container{
             overflow: hidden;
@@ -72,7 +72,7 @@
 <body>
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Electoral Bond</a>
+            <a class="navbar-brand" href="/">Electoral Bond</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -81,10 +81,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">See Data</a>
+                        <a href="/matched-details" class="nav-link active">See Data</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -104,12 +104,12 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">About Electoral Bond</a>
+                        <a href="/about" class="nav-link active">About Electoral Bond</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" id="searchform" action="/search" method="post">
                     <input class="form-control me-2" type="search" placeholder="Bond No i.e. TL11448"
-                        aria-label="Search">
+                        aria-label="Search" name="BondNo">
                     <button class="btn btn-outline-success btn-light" type="submit">Search</button>
                 </form>
             </div>
@@ -125,7 +125,7 @@
             <div class="row">
                 <div class="col-3">
                     <div class="dev">
-                        <img src="static/images/20210312_004911.png" alt="Navin's img" class="developer-img">
+                        <img src="/static/images/20210312_004911.png" alt="Navin's img" class="developer-img">
                     </div>
                 </div>
                 <div class="col-4">
@@ -143,19 +143,19 @@
                         <span class="dev-heading">Social Media</span>
                     </div>
                     <div class="row">
-                        <a class="social-link" href="http://"><i class="fa-brands fa-linkedin"></i> @NavinSins</a>
+                        <a class="social-link" href="https://www.linkedin.com/in/itsnavinsingh"><i class="fa-brands fa-linkedin"></i> @itsnavinsingh</a>
                     </div>
                     <div class="row">
-                        <a class="social-link" href="http://"><i class="fa-brands fa-square-github"></i>
+                        <a class="social-link" href="https://github.com/itsNavinSingh"><i class="fa-brands fa-square-github"></i>
+                            @itsNavinSingh</a>
+                    </div>
+                    <div class="row">
+                        <a class="social-link" href="https://twitter.com/NavinSins"><i class="fa-brands fa-square-x-twitter"></i>
                             @NavinSins</a>
                     </div>
                     <div class="row">
-                        <a class="social-link" href="http://"><i class="fa-brands fa-square-x-twitter"></i>
-                            @NavinSins</a>
-                    </div>
-                    <div class="row">
-                        <a class="social-link" href="http://"><i class="fa-brands fa-square-instagram"></i>
-                            @NavinSins</a>
+                        <a class="social-link" href="https://www.instagram.com/nopeitsnavin"><i class="fa-brands fa-square-instagram"></i>
+                            @nopeitsnavin</a>
                     </div>
                 </div>
             </div>
