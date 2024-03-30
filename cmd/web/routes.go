@@ -21,14 +21,13 @@ func Routes(app *config.AppConfig) http.Handler {
 	mux.Get("/party/details", handlers.Repo.PartyDetails)
 
 	mux.Get("/donor", handlers.Repo.Donor)
-	mux.Post("/donor", handlers.Repo.Donor)
 	mux.Get("/donor/details", handlers.Repo.DonorDetails)
 
 	mux.Get("/matched-details", handlers.Repo.Matched)
 	mux.Post("/matched-details", handlers.Repo.Matched)
 
 	mux.Post("/search", handlers.Repo.Search)
-	mux.Post("/get-details", handlers.Repo.Details)
+	mux.Get("/get-details", handlers.Repo.Details)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))

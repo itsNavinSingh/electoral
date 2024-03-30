@@ -27,12 +27,14 @@ form{
             <tbody>
                 {{range .}}
                 <tr>
-                    <td>{{.name}}</td>
-                    <td>{{.amount}}</td>
-                    <td><form action="/donor/details" method="post">
-                        <input type="hidden" name="name" value="{{.name}}">
-                        <input type="submit" value="Details" class="btn btn-primary">
-                    </form></td>
+                    <td>{{.Name}}</td>
+                    <td>{{.Amount}}</td>
+                    <td>
+                    <form action="/donor/details" method="get">
+                        <input type="hidden" name="donor" value="{{.Name}}">
+                        <input type="submit" value="Details" class="btn btn-outline-success">
+                    </form>
+                    </td>
                 </tr>
                 {{end}}
             </tbody>

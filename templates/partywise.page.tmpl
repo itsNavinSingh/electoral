@@ -11,6 +11,9 @@ form{
 .details{
     margin-top: 2rem;
 }
+.note{
+    color: red;
+}
 </style>
 {{end}}
 
@@ -27,15 +30,17 @@ form{
             <tbody>
                 {{range .}}
                 <tr>
-                    <td>{{.name}}</td>
-                    <td>{{.amount}}</td>
-                    <td><form action="/party/details" method="post">
-                        <input type="hidden" name="name" value="{{.name}}">
-                        <input type="submit" value="Details" class="btn btn-primary">
+                    <td>{{.Name}}</td>
+                    <td>{{.Amount}}</td>
+                    <td>
+                    <form action="/party/details" method="post">
+                        <input type="hidden" name="name" value="{{.Name}}">
+                        <input type="submit" value="Details" class="btn btn-outline-primary">
                     </form></td>
                 </tr>
                 {{end}}
             </tbody>
         </table>
+        <p class="note">*Note : All the data are from 12th Apr 2019 to 15th Feb 2024 !</p>
     </div>
 {{end}}
