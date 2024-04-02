@@ -98,7 +98,12 @@ form{
 <script>
         function showDetails(id) {
             if (document.getElementById(id + "-No").textContent == "") {
-                fetch('/get-details?BondNo=' + id)
+                let formData = new FormData();
+                formData.append("BondNo", id);
+                fetch('/get-details', {
+                    method: "POST",
+                    body: formData,
+                })
                     .then(response => response.json()).
                     then(data => {
                         document.getElementById(id + "-No").textContent = data.BondNo;

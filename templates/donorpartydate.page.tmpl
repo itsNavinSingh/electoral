@@ -2,36 +2,35 @@
 
 {{define "heading"}}
 <style>
-.form-control{
-    margin: 0rem 1rem;
-}
-form{
-    display: flex;
-}
-.details{
-    margin-top: 2rem;
-}
+    .title{
+        text-align: center;
+        font-size: 2rem;
+        color: rgb(139, 185, 254);
+    }
 </style>
 {{end}}
 
 {{define "content"}}
 <div class="details container">
+        <p class="title">Party : {{.Party}}<br>Donor : {{.Donor}}</p>
         <table class="table table-light table-striped">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Amount</th>
+                    <th>Date of Purchase</th>
+                    <th>Total Amount</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                {{range .}}
+                {{range .Data}}
                 <tr>
-                    <td>{{.Name}}</td>
+                    <td>{{.Date}}</td>
                     <td>{{.Amount}}</td>
                     <td>
-                    <form action="/donor/party" method="post">
-                        <input type="hidden" name="donor" value="{{.Name}}">
+                    <form action="/party/donor/date/details" method="post">
+                        <input type="hidden" name="party" value="{{.Party}}">
+                        <input type="hidden" name="donor" value="{{.Donor}}">
+                        <input type="hidden" name="date" value="{{.Date}}">
                         <input type="submit" value="Details" class="btn btn-outline-success">
                     </form>
                     </td>

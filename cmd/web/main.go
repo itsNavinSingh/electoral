@@ -23,7 +23,7 @@ func main() {
 		log.Fatal(err)
 	}
 	app.TemplateCache = tc
-	app.DataBase, err = sql.Open("pgx", "YOUR DATABASE DETAILS")
+	app.DataBase, err = sql.Open("pgx", "host=localhost port=5432 dbname=postgres user=postgres password=itsnavinsingh")
 	if err != nil {
 		log.Fatal(err)
 	}
