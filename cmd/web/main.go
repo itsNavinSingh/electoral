@@ -23,7 +23,7 @@ func main() {
 		log.Fatal(err)
 	}
 	app.TemplateCache = tc
-	app.DataBase, err = sql.Open("pgx", "YOUR DATABASE INFO")
+	app.DataBase, err = sql.Open("pgx", "YOUR DATABASE DETAILS")
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -62,3 +62,7 @@ type PartialMatched struct {
 	Offset int
 	Data []OnePartialMatched
 }
+type SearchReasult struct {
+	Heading string
+	Data []Matched
+}

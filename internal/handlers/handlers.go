@@ -299,7 +299,7 @@ func (m *Repository) Matched(w http.ResponseWriter, r *http.Request) {
 		}
 		Datas.Data = append(Datas.Data, details)
 	}
-	query = "SELECT name_party FROM matched GROUP BY name_party;"
+	query = "SELECT name_party FROM matched GROUP BY name_party ORDER BY name_party;"
 	rows, err = m.App.DataBase.Query(query)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -315,7 +315,7 @@ func (m *Repository) Matched(w http.ResponseWriter, r *http.Request) {
 		}
 		Datas.Parties = append(Datas.Parties, party)
 	}
-	query = "SELECT name_purchaser FROM matched GROUP BY name_purchaser;"
+	query = "SELECT name_purchaser FROM matched GROUP BY name_purchaser ORDER BY name_purchaser;"
 	rows, err = m.App.DataBase.Query(query)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -363,7 +363,7 @@ func (m *Repository) POSTMatched(w http.ResponseWriter, r *http.Request) {
 		}
 		Datas.Data = append(Datas.Data, details)
 	}
-	query = "SELECT name_party FROM matched GROUP BY name_party;"
+	query = "SELECT name_party FROM matched GROUP BY name_party ORDER BY name_party;"
 	rows, err = m.App.DataBase.Query(query)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -379,7 +379,7 @@ func (m *Repository) POSTMatched(w http.ResponseWriter, r *http.Request) {
 		}
 		Datas.Parties = append(Datas.Parties, party)
 	}
-	query = "SELECT name_purchaser FROM matched GROUP BY name_purchaser;"
+	query = "SELECT name_purchaser FROM matched GROUP BY name_purchaser ORDER BY name_purchaser;"
 	rows, err = m.App.DataBase.Query(query)
 	if err != nil {
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -425,4 +425,115 @@ func (m *Repository) GetDetails(w http.ResponseWriter, r *http.Request) {
 	out, _ := json.Marshal(Details)
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(out)
+}
+
+func (m *Repository) Search(w http.ResponseWriter, r *http.Request) {
+	var Details model.SearchReasult
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Something Went Wrong", http.StatusInternalServerError)
+		return
+	}
+	Details.Heading = strings.ToUpper(r.FormValue("BondNo"))
+	bondno := strings.ReplaceAll(Details.Heading, "'", "''")
+	query := fmt.Sprintf("SELECT bond_no, urn, to_char(date_journal, 'DD-MM-YYYY'), to_char(date_purchase, 'DD-MM-YYYY'), to_char(date_expiry, 'DD-MM-YYYY'), name_purchaser, denominations, issue_branch, issue_teller, status, to_char(date_encashment, 'DD-MM-YYYY'), name_party, pay_branch, pay_teller FROM matched WHERE bond_no = '%s';", bondno)
+	var rows *sql.Rows
+	rows, err = m.App.DataBase.Query(query)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+	for rows.Next(){
+		var Detail model.Matched
+		err = rows.Scan(&Detail.BondNo, &Detail.URN, &Detail.DateJournal, &Detail.DatePurchase, &Detail.DateExpiry, &Detail.NameDonor, &Detail.Denomination, &Detail.IssueBranch, &Detail.IssueTeller, &Detail.Status, &Detail.DateEncashment, &Detail.NameParty, &Detail.PayBranch, &Detail.PayTeller)
+		if err != nil {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+		Details.Data = append(Details.Data, Detail)
+	}
+	render.RenderTemplate(w, r, "searchresult.page.tmpl", Details)
+}
+
+func (m *Repository) FilterResult(w http.ResponseWriter, r *http.Request){
+	var Datas model.PartialMatched
+	var queries []string
+	err := r.ParseForm()
+	if err != nil {
+		http.Error(w, "Something Went Wrong", http.StatusInternalServerError)
+		return
+	}
+	bondno := r.FormValue("no")
+	if len(bondno) > 0 {
+		queries = append(queries, fmt.Sprintf("bond_no = '%s'", strings.ToUpper(strings.ReplaceAll(bondno, "'", "''"))))
+	}
+	party := r.FormValue("party")
+	if len(party) > 0 {
+		queries = append(queries, fmt.Sprintf("name_party = '%s'", strings.ToUpper(strings.ReplaceAll(party, "'", "''"))))
+	}
+	donor := r.FormValue("donor")
+	if len(donor) > 0 {
+		queries = append(queries, fmt.Sprintf("name_purchaser = '%s'", strings.ToUpper(strings.ReplaceAll(donor, "'", "''"))))
+	}
+	value := r.FormValue("denominations")
+	if len(value) > 0 {
+		queries = append(queries, fmt.Sprintf("denominations = %s", strings.ToUpper(strings.ReplaceAll(value, "'", "''"))))
+	}
+	if len(queries) == 0 {
+		http.Redirect(w, r, "/matched-details", http.StatusSeeOther)
+		return
+	}
+	condition := strings.Join(queries, " AND ")
+	query := fmt.Sprintf("SELECT bond_no, name_purchaser, name_party, denominations FROM matched WHERE %s;", condition)
+	var rows *sql.Rows
+	rows, err = m.App.DataBase.Query(query)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+	for rows.Next(){
+		var details model.OnePartialMatched
+		err = rows.Scan(&details.BondNo, &details.NameDonor, &details.NameParty, &details.Denomination)
+		if err != nil {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+		Datas.Data = append(Datas.Data, details)
+	}
+	query = "SELECT name_party FROM matched GROUP BY name_party ORDER BY name_party;"
+	rows, err = m.App.DataBase.Query(query)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+	for rows.Next(){
+		var party string
+		err = rows.Scan(&party)
+		if err != nil {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+		Datas.Parties = append(Datas.Parties, party)
+	}
+	query = "SELECT name_purchaser FROM matched GROUP BY name_purchaser ORDER BY name_purchaser;"
+	rows, err = m.App.DataBase.Query(query)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	defer rows.Close()
+	for rows.Next(){
+		var donor string
+		err = rows.Scan(&donor)
+		if err != nil {
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+			return
+		}
+		Datas.Donors = append(Datas.Donors, donor)
+	}
+	Datas.Offset = len(Datas.Data)
+	render.RenderTemplate(w, r, "filterresult.page.tmpl", Datas)
 }

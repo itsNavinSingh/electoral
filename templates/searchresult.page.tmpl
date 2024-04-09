@@ -31,37 +31,37 @@ form{
 
 {{define "content"}}
 <div class="details container">
-        <p class="body-title">Search Reasult for {{.heading}}</p>
-        {{range .}}
+        <p class="body-title">Search Reasult for {{.Heading}}</p>
+        {{range .Data}}
         <div id="{{.BondNo}}" class="full-details">
             <div class="card card-body">
                 <div class="row details-line">
-                    <div class="col">Unique Bond : {{.}}</div>
-                    <div class="col">URN : {{.}}</div>
+                    <div class="col">Unique Bond : {{.BondNo}}</div>
+                    <div class="col">URN : {{.URN}}</div>
                 </div>
                 <div class="row details-line">
-                    <div class="col">Journal Date : {{.}}</div>
-                    <div class="col">Date of Purchase : {{.}}</div>
+                    <div class="col">Journal Date : {{.DateJournal}}</div>
+                    <div class="col">Date of Purchase : {{.DatePurchase}}</div>
                 </div>
                 <div class="row details-line">
-                    <div class="col">Date of Expiry : {{.}}</div>
-                    <div class="col"><strong>Name of Purchaser : {{.}}</strong></div>
+                    <div class="col">Date of Expiry : {{.DateExpiry}}</div>
+                    <div class="col"><strong>Name of Purchaser : {{.NameDonor}}</strong></div>
                 </div>
                 <div class="row details-line">
-                    <div class="col">Issue Branch Code : {{.}}</div>
-                    <div class="col">Issue Teller : {{.}}</div>
+                    <div class="col">Issue Branch Code : {{.IssueBranch}}</div>
+                    <div class="col">Issue Teller : {{.IssueTeller}}</div>
                 </div>
                 <div class="row details-line">
-                    <div class="col">Date of Encasement : {{.}}</div>
-                    <div class="col"><strong>Name of Political Party : {{.}}</strong></div>
+                    <div class="col">Date of Encasement : {{.DateEncashment}}</div>
+                    <div class="col"><strong>Name of Political Party : {{.NameParty}}</strong></div>
                 </div>
                 <div class="row details-line">
-                    <div class="col">Pay Branch Code : {{.}}</div>
-                    <div class="col">Pay Teller : {{.}}</div>
+                    <div class="col">Pay Branch Code : {{.PayBranch}}</div>
+                    <div class="col">Pay Teller : {{.PayTeller}}</div>
                 </div>
                 <div class="row details-line">
-                    <div class="col"><strong>Denomination : {{.}}</strong></div>
-                    <div class="col">Status : {{.}}</div>
+                    <div class="col"><strong>Denomination : ₹{{.Denomination}}</strong></div>
+                    <div class="col">Status : {{.Status}}</div>
                 </div>
             </div>
         </div>

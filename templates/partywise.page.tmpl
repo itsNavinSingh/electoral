@@ -31,7 +31,7 @@ form{
                 {{range .}}
                 <tr>
                     <td>{{.Name}}</td>
-                    <td>{{.Amount}}</td>
+                    <td>₹{{.Amount}}</td>
                     <td>
                     <form action="/party/donor" method="post">
                         <input type="hidden" name="name" value="{{.Name}}">
