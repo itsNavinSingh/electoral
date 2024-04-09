@@ -1,9 +1,0 @@
-Compleated Path
-1. /
-2. /about
-3. /party
-4. /party/donor
-5. /party/donor/date
-6. /donor
-7. /donor/party
-8. /donor/party/date

@@ -11,6 +11,12 @@ form{
 .details{
     margin-top: 2rem;
 }
+.next-btn{
+    padding-left: 90%;
+}
+.hide {
+  display: none;
+}
 </style>
 {{end}}
 
@@ -20,9 +26,15 @@ form{
             <input type="text" name="no" id="no" placeholder="Bond Number" class="form-control">
             <select name="party" id="party" class="form-control">
                 <option value="" disabled selected>Political Party</option>
+                {{range .Parties}}
+                <option value="{{.}}">{{.}}</option>
+                {{end}}
             </select>
             <select name="donor" id="donor" class="form-control">
                 <option value="" disabled selected>Donor Name</option>
+                {{range .Donors}}
+                <option value="{{.}}">{{.}}</option>
+                {{end}}
             </select>
             <select name="denominations" id="denominations" class="form-control">
                 <option value="" disabled selected>Denomination</option>
@@ -47,50 +59,49 @@ form{
                 </tr>
             </thead>
             <tbody>
-                {{range .}}
+                {{range .Data}}
                 <tr>
                     <th scope="row">{{.BondNo}}</th>
-                    <td>{{.Purchaser}}</td>
-                    <td>{{.Party}}</td>
-                    <td>{{.Denomination}}</td>
+                    <td>{{.NameDonor}}</td>
+                    <td>{{.NameParty}}</td>
+                    <td>₹{{.Denomination}}</td>
                     <td>
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#{{.BondNo}}" aria-expanded="false" aria-controls="{{.BondNo}}">
+                        <button class="btn btn-primary" type="button" onclick="getdetails('{{.BondNo}}')">
                             See More
                         </button>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <div class="collapse" id="{{.BondNo}}" class="full-details">
+                        <div class="hide" id="{{.BondNo}}" class="full-details">
                             <div class="card card-body">
                                 <div class="row">
-                                    <div class="col">Unique Bond : {{.}}</div>
-                                    <div class="col">URN : {{.}}</div>
+                                    <div class="col">Unique Bond : <span id="{{.BondNo}}--bondno"></span></div>
+                                    <div class="col">URN : <span id="{{.BondNo}}--urn"></span></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Journal Date : {{.}}</div>
-                                    <div class="col">Date of Purchase : {{.}}</div>
+                                    <div class="col">Journal Date : <span id="{{.BondNo}}--datejournal"></span></div>
+                                    <div class="col">Date of Purchase : <span id="{{.BondNo}}--datepurchase"></span></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Date of Expiry : {{.}}</div>
-                                    <div class="col"><strong>Name of Purchaser : {{.}}</strong></div>
+                                    <div class="col">Date of Expiry : <span id="{{.BondNo}}--dateexpiry"></span></div>
+                                    <div class="col"><strong>Name of Purchaser : <span id="{{.BondNo}}--namedonor"></span></strong></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Issue Branch Code : {{.}}</div>
-                                    <div class="col">Issue Teller : {{.}}</div>
+                                    <div class="col">Issue Branch Code : <span id="{{.BondNo}}--issuebranch"></span></div>
+                                    <div class="col">Issue Teller : <span id="{{.BondNo}}--issueteller"></span></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Date of Encasement : {{.}}</div>
-                                    <div class="col"><strong>Name of Political Party : {{.}}</strong></div>
+                                    <div class="col">Date of Encasement : <span id="{{.BondNo}}--dateencashment"></span></div>
+                                    <div class="col"><strong>Name of Political Party : <span id="{{.BondNo}}--nameparty"></span></strong></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col">Pay Branch Code : {{.}}</div>
-                                    <div class="col">Pay Teller : {{.}}</div>
+                                    <div class="col">Pay Branch Code : <span id="{{.BondNo}}--paybranch"></span></div>
+                                    <div class="col">Pay Teller : <span id="{{.BondNo}}--payteller"></span></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col"><strong>Denomination : {{.}}</strong></div>
-                                    <div class="col">Status : {{.}}</div>
+                                    <div class="col"><strong>Denomination : <span id="{{.BondNo}}--denomination"></span></strong></div>
+                                    <div class="col">Status : <span id="{{.BondNo}}--status"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -99,5 +110,48 @@ form{
                 {{end}}
             </tbody>
         </table>
+        <div class="next-btn">
+        <form action="/matched-details" method="post" class="next">
+            <input type="hidden" name="offset" value="{{.Offset}}">
+            <input type="submit" value="Next" class="btn btn-primary">
+        </form>
     </div>
+    </div>
+{{end}}
+
+{{define "js"}}
+    <script>
+        function getdetails(id) {
+            document.getElementById(id).classList.toggle("hide");
+            let check = document.getElementById(id + "--bondno");
+            if (check.textContent != ""){
+                return;
+            }
+            let data = new FormData()
+            data.append("id", id);
+            fetch("/get-details", {
+                method: "POST",
+                body: data
+            }).then(response => response.json())
+                .then(data => {
+                    document.getElementById(id + "--bondno").textContent = data.BondNo;
+                    document.getElementById(id + "--urn").textContent = data.URN;
+                    document.getElementById(id + "--datejournal").textContent = data.DateJournal;
+                    document.getElementById(id + "--datepurchase").textContent = data.DatePurchase;
+                    document.getElementById(id + "--dateexpiry").textContent = data.DateExpiry;
+                    document.getElementById(id + "--namedonor").textContent = data.NameDonor;
+                    document.getElementById(id + "--issuebranch").textContent = data.IssueBranch;
+                    document.getElementById(id + "--issueteller").textContent = data.IssueTeller;
+                    document.getElementById(id + "--dateencashment").textContent = data.DateEncashment;
+                    document.getElementById(id + "--nameparty").textContent = data.NameParty;
+                    document.getElementById(id + "--paybranch").textContent = data.PayBranch;
+                    document.getElementById(id + "--payteller").textContent = data.PayTeller;
+                    document.getElementById(id + "--denomination").textContent = data.Denomination;
+                    document.getElementById(id + "--status").textContent = data.Status;
+                })
+                .catch(error => {
+      console.error("Error:", error);
+    });
+        }
+    </script>
 {{end}}

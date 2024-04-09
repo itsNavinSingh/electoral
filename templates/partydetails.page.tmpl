@@ -1,127 +1,48 @@
 {{template "base" .}}
 
 {{define "heading"}}
-<style>
-.form-control{
-    margin: 0rem 1rem;
-}
-form{
-    display: flex;
-}
-.details{
-    margin-top: 2rem;
-}
-.body-title{
-    font-size: 3rem;
-    color: rgb(139, 185, 254);
-}
-</style>
+ <style>
+        h1{
+            text-align: center;
+        }
+    </style>
 {{end}}
 
 {{define "content"}}
-<div class="details container">
-        <p class="body-title">{{.NameParty}}</p>
+    
+    <div class="container">
+        <div class="head-data">
+            Party : {{.Party}} <br>
+            Donor : {{.Donor}} <br>
+            Date of Encashment : {{.Date}} <br>
+            <h1>Details</h1>
+        </div>
         <table class="table table-light table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Bond Number</th>
-                    <th scope="col">Date of Encashement</th>
-                    <th scope="col">Donor</th>
-                    <th scope="col">Denomination</th>
-                    <th scope="col"></th>
+                    <th>Bond Number</th>
+                    <th>URN</th>
+                    <th>Date of Purchase</th>
+                    <th>Amount</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                {{range .}}
+                {{range .Data}}
                 <tr>
-                    <th scope="row">{{.BondNo}}</th>
-                    <td>{{.DateEncashment}}</td>
-                    <td>{{.NameDonor}}</td>
-                    <td>{{.Denomination}}</td>
+                    <td>{{.BondNo}}</td>
+                    <td>{{.URN}}</td>
+                    <td>{{.Date}}</td>
+                    <td>₹{{.Denomination}}/-</td>
                     <td>
-                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#{{.BondNo}}" aria-expanded="false" aria-controls="{{.BondNo}}" onclick="(()=>{
-                                showDetails('{{.BondNo}}');
-                            })()">See
-                            Details</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="5">
-                        <div class="collapse" id="{{.BondNo}}" class="full-details">
-                            <div class="card card-body">
-                                <div class="row">
-                                    <div class="col">Unique Bond : <span id="{{.BondNo}}-No"></span></div>
-                                    <div class="col">URN : <span id="{{.BondNo}}-URN"></span></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">Journal Date : <span id="{{.BondNo}}-DateJournal"></span></div>
-                                    <div class="col">Date of Purchase : <span id="{{.BondNo}}-DatePurchase"></span>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">Date of Expiry : <span id="{{.BondNo}}-DateExpiry"></span></div>
-                                    <div class="col"><strong>Name of Purchaser : <span
-                                                id="{{.BondNo}}-NameDonor"></span></strong></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">Issue Branch Code : <span id="{{.BondNo}}-IssueBranch"></span>
-                                    </div>
-                                    <div class="col">Issue Teller : <span id="{{.BondNo}}-IssueTeller"></span></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">Date of Encashment : <span id="{{.BondNo}}-DateEncashment"></span>
-                                    </div>
-                                    <div class="col"><strong>Name of Political Party : <span
-                                                id="{{.BondNo}}-NameParty"></span></strong></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col">Pay Branch Code : <span id="{{.BondNo}}-PayBranch"></span></div>
-                                    <div class="col">Pay Teller : <span id="{{.BondNo}}-PayTeller"></span></div>
-                                </div>
-                                <div class="row">
-                                    <div class="col"><strong>Denomination : <span
-                                                id="{{.BondNo}}-Denomination"></span></strong></div>
-                                    <div class="col">Status : <span id="{{.BondNo}}-Status"></span></div>
-                                </div>
-                            </div>
-                        </div>
+                    <form action="/search" method="post">
+                    <input type="hidden" name="BondNo" value="{{.BondNo}}">
+                    <button class="btn btn-outline-success" type="submit">Details</button>
+                </form>
                     </td>
                 </tr>
                 {{end}}
             </tbody>
         </table>
     </div>
-{{end}}
-
-{{define "js"}}
-<script>
-        function showDetails(id) {
-            if (document.getElementById(id + "-No").textContent == "") {
-                let formData = new FormData();
-                formData.append("BondNo", id);
-                fetch('/get-details', {
-                    method: "post",
-                    body: formData,
-                })
-                    .then(response => response.json()).
-                    then(data => {
-                        document.getElementById(id + "-No").textContent = data.BondNo;
-                        document.getElementById(id + "-URN").textContent = data.URN;
-                        document.getElementById(id + "-DateJournal").textContent = data.DateJournal;
-                        document.getElementById(id + "-DatePurchase").textContent = data.DatePurchase;
-                        document.getElementById(id + "-DateExpiry").textContent = data.DateExpiry;
-                        document.getElementById(id + "-NameDonor").textContent = data.NameDonor;
-                        document.getElementById(id + "-IssueBranch").textContent = data.IssueBranch;
-                        document.getElementById(id + "-IssueTeller").textContent = data.IssueTeller;
-                        document.getElementById(id + "-DateEncashment").textContent = data.DateEncashment;
-                        document.getElementById(id + "-NameParty").textContent = data.NameParty;
-                        document.getElementById(id + "-PayBranch").textContent = data.PayBranch;
-                        document.getElementById(id + "-PayTeller").textContent = data.PayTeller;
-                        document.getElementById(id + "-Denomination").textContent = data.Denomination;
-                        document.getElementById(id + "-Status").textContent = data.Status;
-                    })
-            }
-        }
-    </script>
 {{end}}

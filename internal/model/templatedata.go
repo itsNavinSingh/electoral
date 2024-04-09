@@ -19,7 +19,6 @@ type Matched struct {
 type TotalWise struct {
 	Name   string
 	Amount int
-	Title  string
 }
 type DonorPartyData struct {
 	Title string
@@ -29,14 +28,37 @@ type DonorDetails struct {
 	Title string
 	Data  []Matched
 }
-type PartyDonorDate struct {
-	Party string
-	Donor string
+type OnePartyDonorDate struct {
 	Date string
 	Amount int
 }
-type PartyDonorDateDatas struct{
+type PartyDonorDate struct{
 	Party string
 	Donor string
-	Data []PartyDonorDate
+	Data []OnePartyDonorDate
+}
+type PartyDonorDateDetails struct {
+	Party string
+	Donor string
+	Date string
+	Data []OnePartyDonorDateDetails
+}
+type OnePartyDonorDateDetails struct {
+	BondNo string
+	URN string
+	Date string
+	Denomination int
+}
+
+type OnePartialMatched struct {
+	BondNo string
+	NameDonor string
+	NameParty string
+	Denomination int
+}
+type PartialMatched struct {
+	Parties []string
+	Donors  []string
+	Offset int
+	Data []OnePartialMatched
 }

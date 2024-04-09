@@ -25,10 +25,10 @@
                 {{range .Data}}
                 <tr>
                     <td>{{.Name}}</td>
-                    <td>{{.Amount}}</td>
+                    <td>₹{{.Amount}}</td>
                     <td>
                     <form action="/donor/party/date" method="post">
-                        <input type="hidden" name="donor" value="{{.Title}}">
+                        <input type="hidden" name="donor" value="" class="donor">
                         <input type="hidden" name="party" value="{{.Name}}">
                         <input type="submit" value="Details" class="btn btn-outline-success">
                     </form>
@@ -38,4 +38,12 @@
             </tbody>
         </table>
     </div>
+{{end}}
+{{define "js"}}
+<script>
+            let donor = document.querySelectorAll(".donor")
+            for(var i=0; i<donor.length; i++){
+                donor[i].value = "{{.Title}}";
+            }
+        </script>
 {{end}}
