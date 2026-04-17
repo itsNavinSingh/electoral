@@ -3,7 +3,7 @@ module github.com/itsNavinSingh/electoral
 go 1.25.0
 
 require (
-	github.com/go-chi/chi/v5 v5.0.11
+	github.com/go-chi/chi/v5 v5.2.2
 	github.com/jackc/pgx/v5 v5.9.0
 )
 
